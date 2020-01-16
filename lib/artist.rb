@@ -6,6 +6,7 @@ class Artist
   extend Memorable::ClassMethods          ## extend defines the methods in the module as class methods
   extend Findable::ClassMethods           ## extend defines the methods in the module as class methods
   include Paramable::InstanceMethods      ## include defines the methods in the odule as instance methods
+  include Memorable::InstanceMethods
 
   attr_accessor :name
   attr_reader :songs
@@ -14,7 +15,7 @@ class Artist
   @@artists = []
 
   def initialize
-    @@artists << self
+    super
     @songs = []
   end
 
