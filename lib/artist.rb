@@ -1,13 +1,21 @@
 require 'pry'
 
+
 class Artist
+
+  extend Memorable::ClassMethods          ## extend defines the methods in the module as class methods
+  extend Findable::ClassMethods           ## extend defines the methods in the module as class methods
+  include Paramable::InstanceMethods      ## include defines the methods in the odule as instance methods
+  include Memorable::InstanceMethods
+
   attr_accessor :name
   attr_reader :songs
+
 
   @@artists = []
 
   def initialize
-    @@artists << self
+    super
     @songs = []
   end
 
@@ -19,14 +27,6 @@ class Artist
     @@artists
   end
 
-  def self.reset_all
-    self.all.clear
-  end
-
-  def self.count
-    self.all.count
-  end
-
   def add_song(song)
     @songs << song
     song.artist = self
@@ -36,7 +36,7 @@ class Artist
     songs.each { |song| add_song(song) }
   end
 
-  def to_param
-    name.downcase.gsub(' ', '-')
-  end
+  # def to_param
+  #   name.downcase.gsub(' ', '-')
+  # end
 end
